@@ -7,10 +7,16 @@ import PlacesAutocomplete, {
   getLatLng
 } from "react-places-autocomplete";
 import Script from "react-load-script";
+import { openModal } from './../modals/modalActions'
 
 const mapState = state => ({
   data: state.test.data
 });
+
+const actions = {
+  openModal
+}
+
 const Marker = () => <Icon name='marker' size='big' color='red' />
 class TestComponent extends Component {
     static defaultProps = {
@@ -46,7 +52,7 @@ class TestComponent extends Component {
       value: this.state.address,
       onChange: this.onChange
     };
-
+    const {data, openModal} = this.props;
     return (
        
       <div>
@@ -55,6 +61,7 @@ class TestComponent extends Component {
             onLoad={this.handleScriptLoad}
         /> */}
         <h1>Test Area {this.props.data}</h1>
+        <Button onClick={() => openModal('TestModal', {data: 33})} color='teal' content='Open Modal' />
         <br />
         <br />
         <form onSubmit={this.handleFormSubmit}>
@@ -63,22 +70,22 @@ class TestComponent extends Component {
           <button type="submit">Submit</button>
         </form>
         
-        // Important! Always set the container height explicitly
-      <div style={{ height: '300vh', width: '100%' }}>
-        <GoogleMapReact
-          bootstrapURLKeys={{ key: 'AIzaSyDuxs4LlRKBl0Cujg1IZzM48ChJSP2lZHY' }}
-          defaultCenter={this.props.center}
-          defaultZoom={this.props.zoom}
-        >
-          <Marker
+       
+         {/*  <div style={{ height: '300px', width: '100%' }}>
+            <GoogleMapReact
+              bootstrapURLKeys={{ key: 'AIzaSyDuxs4LlRKBl0Cujg1IZzM48ChJSP2lZHY' }}
+              defaultCenter={this.props.center}
+              defaultZoom={this.props.zoom}
+            >
+              <Marker
 
 
-            lat={24.7847828}
-            lng={46.6946825}
-            text={'Kreyser Avrora'}
-          />
-        </GoogleMapReact>
-      </div>
+                lat={24.7847828}
+                lng={46.6946825}
+                text={'Kreyser Avrora'}
+              />
+            </GoogleMapReact>
+          </div> */}
 
       </div>
     );
