@@ -42,10 +42,10 @@ if (module.hot) {
 }
 
 store.firebaseAuthIsReady.then(
-  () => {render();}
-)
+  () => { render();}
+);
 
-render();
+
 
 // ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
