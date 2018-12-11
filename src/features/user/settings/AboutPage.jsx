@@ -72,4 +72,5 @@ const AboutPage = ({ pristine, submitting, handleSubmit, updateProfile }) => {
   );
 };
 
+
 export default reduxForm({ form: 'userProfile', enableReinitialize: true, destroyOnUnmount: true })(AboutPage);
