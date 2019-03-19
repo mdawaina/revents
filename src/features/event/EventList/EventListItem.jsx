@@ -1,46 +1,66 @@
 import React, { Component } from "react";
-import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
-import format from 'date-fns/format';
-import EventListAttendee from './EventListAttendee';
+import { Segment, Item, Icon, List, Button, Label } from "semantic-ui-react";
+import { Link } from "react-router-dom";
+import format from "date-fns/format";
+import EventListAttendee from "./EventListAttendee";
+import { objectToArray } from '../../../app/common/util/helpers'
 
 class EventListItem extends Component {
   render() {
-    const {event, deleteEvent} = this.props;
+    const { event } = this.props;
+    let path =
+      "https://c5z2h5w9.stackpathcdn.com/wp-content/uploads/2014/08/Male-Fashion-Winter-Jacket-And-Grey-Jeans-Straightening-Tie1.jpg";
+  
     return (
       <Segment.Group>
         <Segment>
           <Item.Group>
             <Item>
-              <Item.Image size="tiny" circular src={event.hostPhotoURL} />
+              {/* <Item.Image size="tiny" circular src={event.hostPhotoURL} /> */}
+              <Item.Image size="tiny" circular src={path} />
+
               <Item.Content>
-                <Item.Header as="a">{event.title}</Item.Header>
+                <Item.Header as={Link} to={`event/${event.id}`}>{event.title}</Item.Header>
                 <Item.Description>
-                  Hosted by <a>{event.hostedBy}</a>
+                  Hosted by <Link to={`profile/${event.hostUid}`}>{event.hostedBy}</Link>
                 </Item.Description>
+                {event.cancelled && (
+                  <Label
+                    style={{ top: "-40px" }}
+                    ribbon="right"
+                    color="red"
+                    content="This event has been cancelled"
+                  />
+                )}
               </Item.Content>
             </Item>
           </Item.Group>
         </Segment>
         <Segment>
           <span>
-            <Icon name="clock" /> {format(event.date.toDate(),'dddd Do MMMM')} at {' '} {format(event.date.toDate(), 'HH:mm')} | 
+            <Icon name="clock" /> {format(event.date.toDate(), "dddd Do MMMM")}{" "}
+            at {format(event.date.toDate(), "HH:mm")} |
             <Icon name="marker" /> {event.venue}
           </span>
         </Segment>
         <Segment secondary>
           <List horizontal>
-          {event.attendees && Object.values(event.attendees).map((attendee, index) => (
-            <EventListAttendee key={index} attendee={attendee} />
-          ))}
-          
-         
+            {event.attendees &&
+              objectToArray(event.attendees).map((attendee) => (
+                <EventListAttendee key={attendee.id} attendee={attendee} />
+              ))}
           </List>
         </Segment>
         <Segment clearing>
-        <span>{event.description}</span>
-        <Button onClick={deleteEvent(event.id)} as="a" color="red" floated="right" content="Delete" />
-          <Button  as={Link} to={`/event/${event.id}`} color="teal" floated="right" content="View" />
+          <span>{event.description}</span>
+          
+          <Button
+            as={Link}
+            to={`/event/${event.id}`}
+            color="teal"
+            floated="right"
+            content="View"
+          />
         </Segment>
       </Segment.Group>
     );

@@ -10,6 +10,17 @@ const firebaseConfig = {
     messagingSenderId: "1068392671717"
 }
 
+/* const firebaseConfig = {
+  apiKey: "AIzaSyC7WT9fGqBUIniI-J9Pc0HOHY9vBAau3Z4",
+  authDomain: "revents-4c316.firebaseapp.com",
+  databaseURL: "https://revents-4c316.firebaseio.com",
+  projectId: "revents-4c316",
+  storageBucket: "revents-4c316.appspot.com",
+  messagingSenderId: "539611537160"
+}
+ */
+
+
 firebase.initializeApp(firebaseConfig);
 const firestore = firebase.firestore();
 const settings = {

@@ -26,8 +26,8 @@ const DateInput = ({
         onBlur={() => onBlur()}
         {...restInput}
       />
-      {touched &&
-        error && (
+      {touched
+        && error && (
           <Label basic color="red">
             {error}
           </Label>
