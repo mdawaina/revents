@@ -7,6 +7,7 @@ export const objectToArray = object => {
 };
 
 export const createNewEvent = (user, photoURL, event) => {
+  console.log(user);
   event.date = moment(event.date).toDate();
   return {
     ...event,

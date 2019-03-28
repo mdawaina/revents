@@ -2,7 +2,7 @@
 .vs
 # dependencies
 /node_modules
-
+/src/app/config
 # testing
 /coverage
 
